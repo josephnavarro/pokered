@@ -1755,12 +1755,12 @@ _IntroducePlayerText::
 
 _IntroduceRivalText::
 	text "This is my grand-"
-	line "son. He's been"
-	cont "your rival since"
-	cont "you were a baby."
+	line "daughter, your"
+	cont "self-sworn rival"
+	cont "since childhood."
 
 	para "...Erm, what is"
-	line "his name again?"
+	line "her name again?"
 	prompt
 
 _OakSpeechText3::
@@ -1791,7 +1791,7 @@ _YourNameIsText::
 
 _HisNameIsText::
 	text "That's right! I"
-	line "remember now! His"
+	line "remember now! Her"
 	cont "name is <RIVAL>!"
 	prompt
 

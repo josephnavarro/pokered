@@ -136,7 +136,7 @@ _OneTwoAndText::
 	text_end
 
 _PoofText::
-	text " Poof!@"
+	text " Zing!@"
 	text_end
 
 _ForgotAndText::

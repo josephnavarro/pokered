@@ -14,7 +14,7 @@ DefaultNamesGirl:
 
 DefaultNamesRival:
 	db   "NEW NAME"
-	next "BLUE"
-	next "GARY"
-	next "JOHN"
+	next "NEMONA"
+	next "GOKU"
+	next "HISOKA"
 	db   "@"

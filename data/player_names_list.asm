@@ -12,7 +12,7 @@ DefaultNamesGirlList:
 
 DefaultNamesRivalList:
 	db "NEW NAME@"
-	db "BLUE@"
-	db "GARY@"
-	db "JOHN@"
+	db "NEMONA@"
+	db "GOKU@"
+	db "HISOKA@"
 
