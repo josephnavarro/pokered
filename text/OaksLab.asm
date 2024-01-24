@@ -288,8 +288,8 @@ _OaksLabRivalReceivedMonText::
 _OaksLabRivalChallengeText::
 	text "<RIVAL>: Vamos,"
 	line "<PLAYER>!"
-    line "Let's have us a"
-	cont "fruitful battle!"
+    para "Let's have us a"
+	line "fruitful battle!"
 
 	para "Come on, I'll take"
 	line "you on!"
