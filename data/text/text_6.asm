@@ -12,9 +12,9 @@ _ItemUseBallText01::
 	prompt
 
 _ItemUseBallText01_Alt::
-	text "It's too strong!"
-	line "It destroyed the"
-	cont "BALL!"
+	text "It was so close!"
+	line "Just kidding. Ha"
+	cont "ha ha."
 	prompt
 
 _ItemUseBallText02::
