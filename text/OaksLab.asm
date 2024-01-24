@@ -1,10 +1,10 @@
 _OaksLabGaryText1::
 	text "<RIVAL>: Oye,"
 	line "<PLAYER>!"
-	cont "Say, you didn't"
+	line "Say, you didn't"
 	cont "happen to see"
-	cont "the PROF. on"
-	cont "your way here,"
+	cont "the PROF. along"
+	cont "the way here,"
 	cont "did you?"
 	done
 
@@ -15,10 +15,10 @@ _OaksLabText40::
 	cont "battling every"
 	cont "waking moment"
 	cont "of every single"
-	cont "day of the rest"
+	cont "day for the rest"
 	cont "of our lives!"
 
-	cont "The rest of"
+	line "For the rest of"
 	cont "our lives!"
 	done
 
@@ -239,18 +239,26 @@ _OaksLabChooseMonText::
 _OaksLabRivalInterjectionText::
 	text "<RIVAL>: Oh!"
 	line "That means we"
-	cont "can be rivals!"
+	cont "can be rivals,"
+	cont "right? We're"
+	cont "going to be"
+	cont "rivals, you"
+	cont "and me! Oh,"
+	cont "I can't wait!"
+	cont "Go! Go on and"
+	cont "choose, <PLAYER>!"
 	done
 
 _OaksLabBePatientText::
 	text "OAK: Be patient,"
-	line "<RIVAL>! You'll"
-	cont "scare them off."
+	line "<RIVAL>! You're"
+	cont "scaring them."
 	done
 
 _OaksLabLeavingText::
-	text "OAK: Hey! Don't go"
-	line "away yet!"
+	text "OAK: Hey! You're"
+	line "not actually"
+	cont "scared, are you?"
 	done
 
 _OaksLabRivalPickingMonText::
@@ -268,7 +276,7 @@ _OaksLabRivalReceivedMonText::
 _OaksLabRivalChallengeText::
 	text "<RIVAL>: Vamos,"
 	line "<PLAYER>!"
-	cont "Let's have us a"
+    line "Let's have us a"
 	cont "fruitful battle!"
 
 	para "Come on, I'll take"
@@ -307,7 +315,7 @@ _OaksLabText22::
 	line "Itching for"
 	cont "another battle,"
 	cont "I see!"
-	cont "Perfect! I've"
+	line "Perfect! I've"
 	cont "caught 50 more-"
 	done
 
