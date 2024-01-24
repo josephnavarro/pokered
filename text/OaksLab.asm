@@ -1,7 +1,7 @@
 _OaksLabGaryText1::
-	text "<RIVAL>: Oye"
+	text "<RIVAL>: Oye,"
 	line "<PLAYER>!"
-	para "Say, you didn't"
+	cont "Say, you didn't"
 	cont "happen to see"
 	cont "the PROF. on"
 	cont "your way here,"
