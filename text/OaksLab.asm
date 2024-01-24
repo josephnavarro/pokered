@@ -1,9 +1,11 @@
 _OaksLabGaryText1::
 	text "<RIVAL>: Oye"
 	line "<PLAYER>! Say,"
-	cont "didja see the"
-	cont "PROF. around"
-	cont "by any chance?"
+	cont "you didn't"
+	cont "happen to see"
+	cont "the PROF. on"
+	cont "your way here,"
+	cont "did you?"
 	done
 
 _OaksLabText40::
@@ -16,11 +18,8 @@ _OaksLabText40::
 	cont "day of the rest"
 	cont "of our lives!"
 
-	para "The rest of"
+	cont "The rest of"
 	cont "our lives!"
-
-	para "Go! Go choose"
-	line "now, <PLAYER>!"
 	done
 
 _OaksLabText41::
