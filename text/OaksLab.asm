@@ -18,8 +18,8 @@ _OaksLabText40::
 	cont "day for the rest"
 	cont "of our lives!"
 
-	line "For the rest of"
-	cont "our lives!"
+	para "For the rest of"
+	line "our lives!"
 	done
 
 _OaksLabText41::
@@ -238,15 +238,27 @@ _OaksLabChooseMonText::
 
 _OaksLabRivalInterjectionText::
 	text "<RIVAL>: Oh!"
-	line "That means we"
-	cont "can be rivals,"
-	cont "right? We're"
+	line "That means you"
+	cont "and I will be"
+	cont "rivals, right,"
+	cont "<PLAYER>? We're"
 	cont "going to be"
-	cont "rivals, you"
-	cont "and me! Oh,"
-	cont "I can't wait!"
+	cont "rivals, just"
+	cont "you and me!"
+	cont "Oh gosh, I"
+	cont "can't wait!"
 	cont "Go! Go on and"
 	cont "choose, <PLAYER>!"
+	cont "Hurry up and"
+	cont "choose! And"
+	cont "then we can"
+	cont "battle, <PLAYER>!"
+	cont "We'll have"
+	cont "our very own"
+	cont "#MON battle,"
+	cont "just the two"
+	cont "of us! Oh, I'm"
+	cont "so excited!"
 	done
 
 _OaksLabBePatientText::
