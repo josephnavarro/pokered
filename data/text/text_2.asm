@@ -156,68 +156,67 @@ _GymStatueText2::
 	done
 
 _ViridianCityPokecenterGuyText::
-	text "#MON CENTERs"
-	line "heal your tired,"
-	cont "hurt or fainted"
+	text "#MON MOTELs"
+	line "are for lodging,"
+	cont "not for healing"
 	cont "#MON!"
 	done
 
 _PewterCityPokecenterGuyText::
-	text "Yawn!"
+	text "Argh!"
 
-	para "When JIGGLYPUFF"
-	line "sings, #MON"
-	cont "get drowsy..."
+	para "When JIGGLYDETH"
+	line "sings, my"
+	cont "bones break!"
 
-	para "...Me too..."
-	line "Snore..."
+	para "...My leg..."
+	line "My spine..."
 	done
 
 _CeruleanPokecenterGuyText::
 	text "BILL has lots of"
 	line "#MON!"
 
-	para "He collects rare"
-	line "ones too!"
+	para "But they belong"
+	line "to PC users."
 	done
 
 _LavenderPokecenterGuyText::
 	text "CUBONEs wear"
 	line "skulls, right?"
 
-	para "People will pay a"
-	line "lot for one!"
+	para "Isn't that METAL"
+	line "as FUCK?"
 	done
 
 _MtMoonPokecenterBenchGuyText::
 	text "If you have too"
 	line "many #MON, you"
-	cont "should store them"
-	cont "via PC!"
+	cont "should give them"
+	cont "all to ME!"
 	done
 
 _RockTunnelPokecenterGuyText::
 	text "I heard that"
-	line "GHOSTs haunt"
+	line "GOTHs haunt"
 	cont "LAVENDER TOWN!"
 	done
 
 _CitrinePokecenterGuyText::
-	text "While #MON can"
+	text "While you can"
 	line "become stronger"
 	cont "with vitamins,"
-	cont "they only go"
-	cont "so far."
+	cont "too much isn't"
+	cont "good for you."
 	
-	para "#MON must"
-	line "battle to reach"
-	cont "their full"
-	cont "potential."
+	para "Unless you"
+	line "enjoy pissing"
+	cont "KIDNEY STONES."
 	done
 
 _UnusedBenchGuyText1::
 	text "I wish I could"
-	line "catch #MON."
+	line "eat #MON."
 	done
 
 _UnusedBenchGuyText2::
@@ -242,24 +241,26 @@ _VermilionPokecenterGuyText::
 	cont "points against"
 	cont "specific types."
 
-	para "So, there is no"
-	line "universally"
-	cont "strong #MON."
+	para "Except for"
+	line "WONDERTOMB,"
+	cont "the best #MON."
 	done
 
 _CeladonCityPokecenterGuyText::
-	text "If I had a BIKE,"
-	line "I would go to"
-	cont "CYCLING ROAD!"
+	text "Who needs a TOWN"
+	line "BIKE when we"
+	cont "have YOUR MOM?"
 	done
 
 _FuchsiaCityPokecenterGuyText::
 	text "If you're studying "
-	line "#MON, visit"
-	cont "the SAFARI ZONE."
+	line "#MON, you should"
+	cont "reconsider your"
+	cont "life choices."
 
-	para "It has all sorts"
-	line "of rare #MON."
+	para "At the end of the"
+	line "day, it's just"
+	cont "a game."
 	done
 
 _CinnabarPokecenterGuyText::
@@ -275,9 +276,9 @@ _CinnabarPokecenterGuyText::
 
 _SaffronCityPokecenterGuyText1::
 	text "It would be great"
-	line "if the ELITE FOUR"
+	line "if the ELITE FOOT"
 	cont "came and stomped"
-	cont "TEAM ROCKET!"
+	cont "my BALLS!"
 	done
 
 _SaffronCityPokecenterGuyText2::
@@ -327,7 +328,7 @@ _TimesUpText::
 	prompt
 
 _GameOverText::
-	text "PA: Your SAFARI"
+	text "The MOST DANGEROUS"
 	line "GAME is over!"
 	done
 
@@ -355,10 +356,10 @@ _CinnabarQuizQuestionsText3::
 	done
 
 _CinnabarQuizQuestionsText4::
-	text "Are FIGHTING-"
+	text "Are STEEL-"
 	line "type moves super"
 	cont "effective on"
-	cont "STEEL #MON?"
+	cont "FIGHTING #MON?"
 	done
 
 _CinnabarQuizQuestionsText5::
@@ -369,7 +370,7 @@ _CinnabarQuizQuestionsText5::
 
 _CinnabarQuizQuestionsText6::
 	text "TM28 contains"
-	line "TOMBSTONER?"
+	line "STUN SEED?"
 	done
 
 _CinnabarGymQuizCorrectText::
@@ -521,7 +522,7 @@ _ViridianSchoolNotebookText2::
 	cont "catch, so weaken"
 	cont "it first!"
 
-	para "Poison, burns and"
+	para "Poison, burns, and"
 	line "other damage are"
 	cont "effective!"
 	prompt
@@ -575,10 +576,12 @@ _IndigoPlateauHQText::
 	done
 
 _RedBedroomSNESText::
-	text "<PLAYER> is"
-	line "playing the SNES!"
-	cont "...Okay!"
-	cont "It's time to go!"
+	text "<PLAYER>'s playing"
+	line "the drums!"
+	cont "...Oh. Those"
+	cont "aren't drums,"
+	cont "and we suddenly"
+	cont "need a new SNES!"
 	done
 
 _Route15UpstairsBinocularsText::
@@ -827,7 +830,15 @@ _PokemonBooksText::
 	done
 
 _DiglettSculptureText::
-	text "It's a butsudan!" ; restored JP elemement
+	text "You climb into"
+	line "the cupboard,"
+	cont "then immediately"
+	cont "climb back out."
+
+	para "OAK: <PLAYER>,"
+	line "remind me never"
+	cont "to let you into"
+	cont "my house."
 	done
 
 _ElevatorText::
@@ -845,10 +856,10 @@ _PokemonStuffText::
 	done
 
 _OutOfSafariBallsText::
-	text "PA: Ding-dong!"
+	text "PA: Hands up!"
 
-	para "You are out of"
-	line "SAFARI BALLs!"
+	para "You are under"
+	line "arrest!"
 	prompt
 
 _WildRanText::
@@ -912,16 +923,17 @@ _UseNextMonText::
 	done
 
 _Rival1WinText::
-	text "<RIVAL>: Yeah! Am"
-	line "I great or what?"
+	text "<RIVAL>: Hey, not"
+	line "a bad first try!"
 	prompt
 
 _PlayerBlackedOutText2::
 	text "<PLAYER> is out of"
-	line "useable #MON!"
+	line "usable #MON!"
 
-	para "<PLAYER> blacked"
-	line "out!"
+	para "<PLAYER> was reborn"
+	line "due to the effects"
+	cont "of SAMSARA!"
 	prompt
 
 _LinkBattleLostText::
@@ -1067,7 +1079,8 @@ _ConfusedNoMoreText::
 
 _SavingEnergyText::
 	text "<USER>"
-	line "is saving energy!"
+	line "really thinks BIDE"
+	cont "will pay off!"
 	prompt
 
 _UnleashedEnergyText::
@@ -1814,7 +1827,7 @@ _ContCharText::
 	text_end
 
 _PromptToSurfText::
-	text "The water is calm."
+	text "The water is warm."
 	line "Would you like to"
 	cont "SURF?"
 	done
@@ -1856,7 +1869,7 @@ _MeltanIncrement::
 	prompt
 
 _GameCornerArbok:: ; Putting here to be potentially farcalled somewhere else.
-	text "ARBOK: Chaaarbok!"
+	text "ARBOK: Aaaugh!"
 	done
 
 _BirdBattleText:: ; This is defined in many places and can just be farcalled here instead.

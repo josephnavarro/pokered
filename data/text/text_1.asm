@@ -53,8 +53,8 @@ _MartSignText::
 	done
 
 _PokeCenterSignText::
-	text "Heal Your #MON!"
-	line "#MON CENTER"
+	text "Stay the night!"
+	line "#MON MOTEL"
 	done
 
 _FoundItemText::
@@ -72,7 +72,7 @@ _NoMoreRoomForItemText::
 _OaksAideHiText::
 	text "Hi! Remember me?"
 	line "I'm PROF.OAK's"
-	cont "AIDE!"
+	cont "SON!"
 
 	para "If you caught @"
 	text_decimal hOaksAideRequirement, 1, 3
@@ -149,6 +149,6 @@ _OaksAideNoRoomText::
 	done
 
 _NurseChanseyText::
-	text "CHANSEY: Chaaan"
-	line "sey!"
+	text "COSPLAYER: I'm"
+	line "CHANSEY!"
 	done

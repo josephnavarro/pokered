@@ -27,14 +27,14 @@ _GotOffBicycleText2::
 	prompt
 
 _ThrewAwayItemText::
-	text "Threw away"
+	text "Swallowed"
 	line "@"
 	text_ram wcd6d
 	text "."
 	prompt
 
 _IsItOKToTossItemText::
-	text "Is it OK to toss"
+	text "Is it OK to eat"
 	line "@"
 	text_ram wStringBuffer
 	text "?"
@@ -42,7 +42,7 @@ _IsItOKToTossItemText::
 
 _TooImportantToTossText::
 	text "That's too impor-"
-	line "tant to toss!"
+	line "tant to eat!"
 	prompt
 
 _AlreadyKnowsText::
