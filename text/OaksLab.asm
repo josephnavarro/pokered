@@ -387,7 +387,7 @@ _OaksLabText26::
 _OaksLabText27::
 	text "<RIVAL>: Alright"
 	line "PROF.! Leave it"
-	cont "all to <PLAYER>!"
+	cont "to <PLAYER>!"
 
 	para "<PLAYER>, sorry to"
 	line "saddle you with"
