@@ -298,8 +298,8 @@ _OaksLabRivalChallengeText::
 _OaksLabText_1d3be::
 	text "Oooh!"
 	line "Unbelievable!"
-	cont "You're so"
-	cont "talented!"
+	cont "You're a natural"
+	cont "at this!"
 	prompt
 
 _OaksLabText_1d3c3::
@@ -314,8 +314,8 @@ _OaksLabRivalToughenUpText::
 	cont "toughen it up!"
 
 	para "<PLAYER>! We'll"
-	line "definitely"
-	cont "battle more!"
+	line "definitely be"
+	cont "battling more!"
 	done
 
 _OaksLabText21::
@@ -327,7 +327,8 @@ _OaksLabText22::
 	line "Itching for"
 	cont "another battle,"
 	cont "I see!"
-	line "Perfect! I've"
+	para "Perfect! It just"
+	line "so happens I've"
 	cont "caught 50 more-"
 	done
 
@@ -386,19 +387,41 @@ _OaksLabText26::
 _OaksLabText27::
 	text "<RIVAL>: Alright"
 	line "PROF.! Leave it"
-	cont "all to me!"
+	cont "all to <PLAYER>!"
 
-	para "<PLAYER>, I hate to"
-	line "say it, but I'd"
-	cont "rather battle."
+	para "<PLAYER>, sorry to"
+	line "saddle you with"
+	cont "this. I'd just"
+	cont "rather focus on"
+	cont "battling is all."
 
-	para "I know! I'll"
-	line "borrow a TOWN MAP"
-	cont "from my roommate!"
+	para "I will make it up"
+	line "to you, though."
+	cont "You still don't"
+	cont "have your own"
+	cont "TOWN MAP yet,"
+	cont "correct?"
+	
+	para "Then consider"
+	line "this your lucky" 
+	cont "day! My roommate"
+	cont "and I have TOWN"
+	cont "MAPs to spare."
+	
+	para "Actually, now I'm"
+	line "wondering why we"
+	cont "keep so many TOWN"
+	cont "MAPs in the first"
+	cont "place. I feel like"
+	cont "one should be more"
+	cont "than enough."
 
-	para "I'll remind her"
-	line "to lend you one,"
-	cont "<PLAYER>!"
+	para "...Er, anyway!"
+	line "I'll tell her to"
+	cont "lend you a TOWN"
+	cont "MAP, <PLAYER>, so"
+	cont "don't forget to"
+	cont "pick it up!"
 	done
 
 _OaksLabText_1d405::
