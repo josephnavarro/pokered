@@ -231,7 +231,7 @@ _NoSurfingHereText::
 	prompt
 
 _BoxFullCannotThrowBallText::
-	text "The #MON BOX"
-	line "is full! Can't"
-	cont "use that item!"
+	text "Full #MON BOX?"
+	line "Welcome to"
+	cont "1995, kid!"
 	prompt
