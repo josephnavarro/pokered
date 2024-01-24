@@ -13,8 +13,8 @@ _ItemUseBallText01::
 
 _ItemUseBallText01_Alt::
 	text "It was so close!"
-	line "Just kidding. Ha"
-	cont "ha ha."
+	line "Just kidding."
+	cont "Ha ha ha."
 	prompt
 
 _ItemUseBallText02::
