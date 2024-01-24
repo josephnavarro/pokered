@@ -181,13 +181,13 @@ _TeachMachineMoveText::
 
 _MonCannotLearnMachineMoveText::
 	text_ram wcd6d
-	text " is too"
-	line "lazy to try out"
+	text " laughs"
+	line "at the sight of"
 	cont "@"
 	text_ram wStringBuffer
 	text "."
 
-	para "It gave up on"
+	para "That means no"
 	line "@"
 	text_ram wStringBuffer
 	text "."
