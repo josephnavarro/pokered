@@ -75,14 +75,17 @@ TypeEffects:
 	db ROCK,         BUG,          SUPER_EFFECTIVE
 	db ROCK,         ICE,          SUPER_EFFECTIVE
 	db GHOST,        NORMAL,       NO_EFFECT
-	db GHOST,        PSYCHIC_TYPE, NO_EFFECT
+; (the Gen 1 GHOST -> PSYCHIC "no effect" bug is removed: Shedinja's Ghost
+; moves are real GHOST moves now and must be able to hit Psychic types)
 	db FIRE,         DRAGON,       NOT_VERY_EFFECTIVE
 	db WATER,        DRAGON,       NOT_VERY_EFFECTIVE
 	db ELECTRIC,     DRAGON,       NOT_VERY_EFFECTIVE
 	db GRASS,        DRAGON,       NOT_VERY_EFFECTIVE
 	db ICE,          DRAGON,       SUPER_EFFECTIVE
 	db DRAGON,       DRAGON,       SUPER_EFFECTIVE
-; GUARD is a copy of BUG (both as attacker and as defender)
+; GUARD is a copy of BUG's DEFENSIVE matchups. WONDER and GUARD exist only
+; as types on a Pokemon (Shedinja); no move has either type, so neither ever
+; appears as an attacker here.
 	db FIRE,         GUARD,        SUPER_EFFECTIVE
 	db GRASS,        GUARD,        NOT_VERY_EFFECTIVE
 	db FIGHTING,     GUARD,        NOT_VERY_EFFECTIVE
@@ -90,13 +93,6 @@ TypeEffects:
 	db GROUND,       GUARD,        NOT_VERY_EFFECTIVE
 	db FLYING,       GUARD,        SUPER_EFFECTIVE
 	db ROCK,         GUARD,        SUPER_EFFECTIVE
-	db GUARD,        FIRE,         NOT_VERY_EFFECTIVE
-	db GUARD,        GRASS,        SUPER_EFFECTIVE
-	db GUARD,        FIGHTING,     NOT_VERY_EFFECTIVE
-	db GUARD,        FLYING,       NOT_VERY_EFFECTIVE
-	db GUARD,        PSYCHIC_TYPE, SUPER_EFFECTIVE
-	db GUARD,        GHOST,        NOT_VERY_EFFECTIVE
-	db GUARD,        POISON,       SUPER_EFFECTIVE
 ; STEEL as an attacker (Gen 2 chart)
 	db STEEL,        ROCK,         SUPER_EFFECTIVE
 	db STEEL,        ICE,          SUPER_EFFECTIVE
@@ -104,9 +100,6 @@ TypeEffects:
 	db STEEL,        WATER,        NOT_VERY_EFFECTIVE
 	db STEEL,        ELECTRIC,     NOT_VERY_EFFECTIVE
 	db STEEL,        STEEL,        NOT_VERY_EFFECTIVE
-; WONDER as an attacker behaves like Ghost (without the Gen 1 Psychic bug)
-	db WONDER,       GHOST,        SUPER_EFFECTIVE
-	db WONDER,       NORMAL,       NO_EFFECT
 ; WONDER simulates Wonder Guard: as a defender it is immune to every type
 ; that is not super effective against a Bug/Ghost (Fire, Flying, Rock and
 ; Ghost stay neutral here; GUARD as the second type supplies the 2x for the
@@ -118,7 +111,6 @@ TypeEffects:
 	db POISON,       WONDER,       NO_EFFECT
 	db GROUND,       WONDER,       NO_EFFECT
 	db BUG,          WONDER,       NO_EFFECT
-	db GUARD,        WONDER,       NO_EFFECT
 	db STEEL,        WONDER,       NO_EFFECT
 	db WATER,        WONDER,       NO_EFFECT
 	db GRASS,        WONDER,       NO_EFFECT
@@ -127,5 +119,4 @@ TypeEffects:
 	db ICE,          WONDER,       NO_EFFECT
 	db DRAGON,       WONDER,       NO_EFFECT
 	db GHOST,        WONDER,       SUPER_EFFECTIVE
-	db WONDER,       WONDER,       SUPER_EFFECTIVE
 	db -1 ; end

@@ -175,9 +175,9 @@ Moves:
 	move SUPER_FANG,   SUPER_FANG_EFFECT,            1, NORMAL,        90, 10
 	move SLASH,        NO_ADDITIONAL_EFFECT,        70, NORMAL,       100, 20
 	move SUBSTITUTE,   SUBSTITUTE_EFFECT,            0, NORMAL,       100, 10
-	move SHADOW_CLAW,  NO_ADDITIONAL_EFFECT,        70, WONDER,       100, 15 ; high critical hit ratio (see HighCriticalMoves)
-	move SHADOW_SNEAK, NO_ADDITIONAL_EFFECT,        40, WONDER,       100, 30 ; increased priority (handled like QUICK_ATTACK)
-	move SHADOW_BALL,  DEFENSE_DOWN_SIDE_EFFECT,    80, WONDER,       100, 15
+	move SHADOW_CLAW,  NO_ADDITIONAL_EFFECT,        70, GHOST,        100, 15 ; high critical hit ratio (see HighCriticalMoves)
+	move SHADOW_SNEAK, NO_ADDITIONAL_EFFECT,        40, GHOST,        100, 30 ; increased priority (handled like QUICK_ATTACK)
+	move SHADOW_BALL,  DEFENSE_DOWN_SIDE_EFFECT,    80, GHOST,        100, 15
 	move METAL_CLAW,   ATTACK_UP_SIDE_EFFECT,       50, STEEL,         95, 35
 	move STRUGGLE,     RECOIL_EFFECT,               50, NORMAL,       100, 10
 	assert_table_length NUM_ATTACKS

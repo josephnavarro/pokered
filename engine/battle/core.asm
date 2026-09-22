@@ -5225,11 +5225,11 @@ AdjustDamageForMoveType:
 	ld a, [wEnemyMoveType]
 	ld [wMoveType], a
 .next
-; For the same type attack bonus, WONDER counts as GHOST and GUARD counts as
-; BUG, so Shedinja's Ghost and Bug moves still get STAB (and vice versa).
+; For the same type attack bonus, a WONDER Pokemon counts as GHOST and a GUARD
+; Pokemon counts as BUG, so Shedinja still gets STAB on Ghost and Bug moves.
+; Only the attacker's types are canonicalized: no move has those types.
 	ld a, [wMoveType]
-	call .canonicalType
-	ld l, a ; l = move type (canonical)
+	ld l, a ; l = move type
 	ld a, b
 	call .canonicalType
 	cp l ; does the move type match type 1 of the attacker?
