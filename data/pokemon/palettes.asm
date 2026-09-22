@@ -151,5 +151,5 @@ MonsterPalettes:
 	db PAL_BLUEMON   ; DRAGONAIR
 	db PAL_BROWNMON  ; DRAGONITE
 	db PAL_MEWMON    ; MEWTWO
-	db PAL_MEWMON    ; MEW
+	db PAL_BROWNMON  ; SHEDINJA
 	assert_table_length NUM_POKEMON + 1

@@ -192,12 +192,14 @@ OaksLabPlayerForcedToWalkBackScript:
 	ret
 
 OaksLabChoseStarterScript:
-	ld a, [wPlayerStarter]
-	cp STARTER1
-	jr z, .Charmander
+	; the player always picks a Shedinja, so the ball the rival walks to
+	; is derived from the starter he is about to take
+	ld a, [wRivalStarterTemp]
 	cp STARTER2
-	jr z, .Squirtle
-	jr .Bulbasaur
+	jr z, .Charmander ; rival takes the middle (Squirtle) ball
+	cp STARTER3
+	jr z, .Squirtle   ; rival takes the right (Bulbasaur) ball
+	jr .Bulbasaur     ; rival takes the left (Charmander) ball
 .Charmander
 	ld de, .MiddleBallMovement1
 	ld a, [wYCoord]
@@ -794,13 +796,15 @@ OaksLabRivalText:
 	text_far _OaksLabRivalMyPokemonLooksStrongerText
 	text_end
 
+; All three balls contain a Shedinja for the player. The rival still takes
+; the vanilla counterpart of whichever ball was chosen, so his teams are unchanged.
 OaksLabCharmanderPokeBallText:
 	text_asm
 	ld a, STARTER2
 	ld [wRivalStarterTemp], a
 	ld a, OAKSLAB_SQUIRTLE_POKE_BALL
 	ld [wRivalStarterBallSpriteIndex], a
-	ld a, STARTER1
+	ld a, SHEDINJA
 	ld b, OAKSLAB_CHARMANDER_POKE_BALL
 	jr OaksLabSelectedPokeBallScript
 
@@ -810,7 +814,7 @@ OaksLabSquirtlePokeBallText:
 	ld [wRivalStarterTemp], a
 	ld a, OAKSLAB_BULBASAUR_POKE_BALL
 	ld [wRivalStarterBallSpriteIndex], a
-	ld a, STARTER2
+	ld a, SHEDINJA
 	ld b, OAKSLAB_SQUIRTLE_POKE_BALL
 	jr OaksLabSelectedPokeBallScript
 
@@ -820,7 +824,7 @@ OaksLabBulbasaurPokeBallText:
 	ld [wRivalStarterTemp], a
 	ld a, OAKSLAB_CHARMANDER_POKE_BALL
 	ld [wRivalStarterBallSpriteIndex], a
-	ld a, STARTER3
+	ld a, SHEDINJA
 	ld b, OAKSLAB_BULBASAUR_POKE_BALL
 
 OaksLabSelectedPokeBallScript:
@@ -861,33 +865,9 @@ OaksLabShowPokeBallPokemonScript:
 	call ReloadMapData
 	ld c, 10
 	call DelayFrames
-	ld a, [wSpriteIndex]
-	cp OAKSLAB_CHARMANDER_POKE_BALL
-	jr z, OaksLabYouWantCharmanderText
-	cp OAKSLAB_SQUIRTLE_POKE_BALL
-	jr z, OaksLabYouWantSquirtleText
-	jr OaksLabYouWantBulbasaurText
-
-OaksLabYouWantCharmanderText:
-	ld hl, .Text
-	jr OaksLabMonChoiceMenu
-.Text:
-	text_far _OaksLabYouWantCharmanderText
-	text_end
-
-OaksLabYouWantSquirtleText:
-	ld hl, .Text
-	jr OaksLabMonChoiceMenu
-.Text:
-	text_far _OaksLabYouWantSquirtleText
-	text_end
-
-OaksLabYouWantBulbasaurText:
-	ld hl, .Text
-	jr OaksLabMonChoiceMenu
-.Text:
-	text_far _OaksLabYouWantBulbasaurText
-	text_end
+	; every ball holds a Shedinja
+	ld hl, OaksLabYouWantShedinjaText
+	; fallthrough
 
 OaksLabMonChoiceMenu:
 	call PrintText
@@ -937,6 +917,10 @@ OaksLabMonChoiceMenu:
 	ld [wOaksLabCurScript], a
 OaksLabMonChoiceEnd:
 	jp TextScriptEnd
+
+OaksLabYouWantShedinjaText:
+	text_far _OaksLabYouWantShedinjaText
+	text_end
 
 OaksLabMonEnergeticText:
 	text_far _OaksLabMonEnergeticText

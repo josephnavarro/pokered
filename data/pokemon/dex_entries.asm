@@ -20,7 +20,7 @@ PokedexEntryPointers:
 	dw RhyhornDexEntry
 	dw LaprasDexEntry
 	dw ArcanineDexEntry
-	dw MewDexEntry
+	dw ShedinjaDexEntry
 	dw GyaradosDexEntry
 	dw ShellderDexEntry
 	dw TentacoolDexEntry
@@ -337,11 +337,11 @@ ArcanineDexEntry:
 	text_far _ArcanineDexEntry
 	text_end
 
-MewDexEntry:
-	db "NEW SPECIE@"
-	db 1,4
-	dw 90
-	text_far _MewDexEntry
+ShedinjaDexEntry:
+	db "SHED@"
+	db 2,7
+	dw 26
+	text_far _ShedinjaDexEntry
 	text_end
 
 GyaradosDexEntry:

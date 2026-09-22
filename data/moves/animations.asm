@@ -164,6 +164,10 @@ AttackAnimationPointers:
 	dw SuperFangAnim
 	dw SlashAnim
 	dw SubstituteAnim
+	dw SlashAnim       ; SHADOW_CLAW
+	dw QuickAttackAnim ; SHADOW_SNEAK
+	dw NightShadeAnim  ; SHADOW_BALL
+	dw ScratchAnim     ; METAL_CLAW
 	dw StruggleAnim
 	assert_table_length NUM_ATTACKS
 	dw ShowPicAnim

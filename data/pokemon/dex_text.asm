@@ -198,14 +198,14 @@ _ArcanineDexEntry::
 	next "as if on wings"
 	dex
 
-_MewDexEntry::
-	text "So rare that it"
-	next "is still said to"
-	next "be a mirage by"
+_ShedinjaDexEntry::
+	text "A hollow shell"
+	next "left behind by"
+	next "NINCADA. It won't"
 
-	page "many experts. Only"
-	next "a few people have"
-	next "seen it worldwide"
+	page "move a twitch."
+	next "It has just 1 HP"
+	next "and no weak spot"
 	dex
 
 _GyaradosDexEntry::

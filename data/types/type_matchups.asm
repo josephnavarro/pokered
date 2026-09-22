@@ -82,4 +82,50 @@ TypeEffects:
 	db GRASS,        DRAGON,       NOT_VERY_EFFECTIVE
 	db ICE,          DRAGON,       SUPER_EFFECTIVE
 	db DRAGON,       DRAGON,       SUPER_EFFECTIVE
+; GUARD is a copy of BUG (both as attacker and as defender)
+	db FIRE,         GUARD,        SUPER_EFFECTIVE
+	db GRASS,        GUARD,        NOT_VERY_EFFECTIVE
+	db FIGHTING,     GUARD,        NOT_VERY_EFFECTIVE
+	db POISON,       GUARD,        SUPER_EFFECTIVE
+	db GROUND,       GUARD,        NOT_VERY_EFFECTIVE
+	db FLYING,       GUARD,        SUPER_EFFECTIVE
+	db ROCK,         GUARD,        SUPER_EFFECTIVE
+	db GUARD,        FIRE,         NOT_VERY_EFFECTIVE
+	db GUARD,        GRASS,        SUPER_EFFECTIVE
+	db GUARD,        FIGHTING,     NOT_VERY_EFFECTIVE
+	db GUARD,        FLYING,       NOT_VERY_EFFECTIVE
+	db GUARD,        PSYCHIC_TYPE, SUPER_EFFECTIVE
+	db GUARD,        GHOST,        NOT_VERY_EFFECTIVE
+	db GUARD,        POISON,       SUPER_EFFECTIVE
+; STEEL as an attacker (Gen 2 chart)
+	db STEEL,        ROCK,         SUPER_EFFECTIVE
+	db STEEL,        ICE,          SUPER_EFFECTIVE
+	db STEEL,        FIRE,         NOT_VERY_EFFECTIVE
+	db STEEL,        WATER,        NOT_VERY_EFFECTIVE
+	db STEEL,        ELECTRIC,     NOT_VERY_EFFECTIVE
+	db STEEL,        STEEL,        NOT_VERY_EFFECTIVE
+; WONDER as an attacker behaves like Ghost (without the Gen 1 Psychic bug)
+	db WONDER,       GHOST,        SUPER_EFFECTIVE
+	db WONDER,       NORMAL,       NO_EFFECT
+; WONDER simulates Wonder Guard: as a defender it is immune to every type
+; that is not super effective against a Bug/Ghost (Fire, Flying, Rock and
+; Ghost stay neutral here; GUARD as the second type supplies the 2x for the
+; first three, and 0 * anything is still 0 for the rest).
+; These rows must stay LAST: the battle engine only remembers the multiplier of
+; the last matching row for the "doesn't affect"/"super effective" message.
+	db NORMAL,       WONDER,       NO_EFFECT
+	db FIGHTING,     WONDER,       NO_EFFECT
+	db POISON,       WONDER,       NO_EFFECT
+	db GROUND,       WONDER,       NO_EFFECT
+	db BUG,          WONDER,       NO_EFFECT
+	db GUARD,        WONDER,       NO_EFFECT
+	db STEEL,        WONDER,       NO_EFFECT
+	db WATER,        WONDER,       NO_EFFECT
+	db GRASS,        WONDER,       NO_EFFECT
+	db ELECTRIC,     WONDER,       NO_EFFECT
+	db PSYCHIC_TYPE, WONDER,       NO_EFFECT
+	db ICE,          WONDER,       NO_EFFECT
+	db DRAGON,       WONDER,       NO_EFFECT
+	db GHOST,        WONDER,       SUPER_EFFECTIVE
+	db WONDER,       WONDER,       SUPER_EFFECTIVE
 	db -1 ; end

@@ -356,6 +356,14 @@ StatModifierUpEffect:
 	ld de, wEnemyMoveEffect
 .statModifierUpEffect
 	ld a, [de]
+	cp ATTACK_UP_SIDE_EFFECT
+	jr nz, .notSideEffect
+	call BattleRandom
+	cp 10 percent + 1 ; chance for the side effect
+	ret nc
+	ld a, ATTACK_UP1_EFFECT ; from here on, act exactly like a +1 Attack move
+	ld [de], a
+.notSideEffect
 	sub ATTACK_UP1_EFFECT
 	cp EVASION_UP1_EFFECT + $3 - ATTACK_UP1_EFFECT ; covers all +1 effects
 	jr c, .incrementStatMod

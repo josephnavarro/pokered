@@ -190,6 +190,17 @@ CalcStat::
 	cp $1
 	ld a, 5 ; + 5 for non-HP stat
 	jr nz, .notHPStat
+	; Shedinja always has exactly 1 HP, regardless of level, DVs or stat exp
+	ld a, [wMonHIndex]
+	cp SHEDINJA
+	jr nz, .normalHP
+	xor a
+	ldh [hMultiplicand], a
+	ldh [hMultiplicand+1], a
+	inc a
+	ldh [hMultiplicand+2], a
+	jr .noOverflow
+.normalHP
 	ld a, [wCurEnemyLVL]
 	ld b, a
 	ldh a, [hMultiplicand+2]

@@ -11,6 +11,9 @@ DEF PHYSICAL EQU const_value
 	const BIRD         ; $06
 	const BUG          ; $07
 	const GHOST        ; $08
+	const WONDER       ; $09 ; Shedinja's Ghost variant: takes no damage except from Wonder Guard-piercing types
+	const GUARD        ; $0A ; Shedinja's Bug variant: same matchups as Bug
+	const STEEL        ; $0B
 
 DEF UNUSED_TYPES EQU const_value
 	const_next 20

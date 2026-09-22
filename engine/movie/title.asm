@@ -120,12 +120,7 @@ DisplayTitleScreen:
 	call LoadScreenTilesFromBuffer2
 	call EnableLCD
 
-IF DEF(_RED)
-	ld a, STARTER1 ; which Pokemon to show first on the title screen
-ENDC
-IF DEF(_BLUE)
-	ld a, STARTER2 ; which Pokemon to show first on the title screen
-ENDC
+	ld a, SHEDINJA ; which Pokemon to show first on the title screen
 	ld [wTitleMonSpecies], a
 	call LoadTitleMonSprite
 
@@ -269,8 +264,8 @@ TitleScreenPickNewMon:
 	ld a, HIGH(vBGMap0)
 	call TitleScreenCopyTileMapToVRAM
 
-.loop
-; Keep looping until a mon different from the current one is picked.
+; Pick a mon from TitleMons. The list is all Shedinja, so the vanilla
+; "must differ from the current one" retry loop would never terminate.
 	call Random
 	and $f
 	ld c, a
@@ -278,13 +273,7 @@ TitleScreenPickNewMon:
 	ld hl, TitleMons
 	add hl, bc
 	ld a, [hl]
-	ld hl, wTitleMonSpecies
-
-; Can't be the same as before.
-	cp [hl]
-	jr z, .loop
-
-	ld [hl], a
+	ld [wTitleMonSpecies], a
 	call LoadTitleMonSprite
 
 	ld a, $90
@@ -392,16 +381,21 @@ CopyrightTextString:
 
 INCLUDE "data/pokemon/title_mons.asm"
 
-; prints version text (red, blue)
+; prints version text (shed, blue)
 PrintGameVersionOnTitleScreen:
+IF DEF(_RED)
+	hlcoord 6, 8 ; "Shed Version" is one tile wider than "Red Version"
+ENDC
+IF DEF(_BLUE)
 	hlcoord 7, 8
+ENDC
 	ld de, VersionOnTitleScreenText
 	jp PlaceString
 
 ; these point to special tiles specifically loaded for that purpose and are not usual text
 VersionOnTitleScreenText:
 IF DEF(_RED)
-	db $60,$61,$7F,$65,$66,$67,$68,$69,"@" ; "Red Version"
+	db $60,$61,$62,$7F,$65,$66,$67,$68,$69,"@" ; "Shed Version"
 ENDC
 IF DEF(_BLUE)
 	db $61,$62,$63,$64,$65,$66,$67,$68,"@" ; "Blue Version"

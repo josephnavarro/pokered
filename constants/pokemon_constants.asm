@@ -27,7 +27,7 @@
 	const RHYHORN            ; $12
 	const LAPRAS             ; $13
 	const ARCANINE           ; $14
-	const MEW                ; $15
+	const SHEDINJA           ; $15 ; replaces Mew
 	const GYARADOS           ; $16
 	const SHELLDER           ; $17
 	const TENTACOOL          ; $18

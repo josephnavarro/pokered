@@ -19,9 +19,9 @@ DebugNewGameParty: ; unreferenced except in _DEBUG
 	; From https://web.archive.org/web/20000607152840/http://pocket.ign.com/news/14973.html
 	db EXEGGUTOR, 90
 IF DEF(_DEBUG)
-	db MEW, 5
+	db SHEDINJA, 5
 ELSE
-	db MEW, 20
+	db SHEDINJA, 20
 ENDC
 	db JOLTEON, 56
 	db DUGTRIO, 56

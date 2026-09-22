@@ -87,4 +87,5 @@ MoveEffectPointerTable:
 	dw LeechSeedEffect           ; LEECH_SEED_EFFECT
 	dw SplashEffect              ; SPLASH_EFFECT
 	dw DisableEffect             ; DISABLE_EFFECT
+	dw StatModifierUpEffect      ; ATTACK_UP_SIDE_EFFECT
 	assert_table_length NUM_MOVE_EFFECTS

@@ -127,9 +127,9 @@ MACRO sound_dex_page_added
 	db TX_SOUND_DEX_PAGE_ADDED
 ENDM
 
-	const TX_SOUND_CRY_NIDORINA ; $14
-MACRO sound_cry_nidorina
-	db TX_SOUND_CRY_NIDORINA
+	const TX_SOUND_CRY_SHEDINJA ; $14 (was Nidorina's cry in the vanilla intro)
+MACRO sound_cry_shedinja
+	db TX_SOUND_CRY_SHEDINJA
 ENDM
 
 	const TX_SOUND_CRY_PIDGEOT ; $15

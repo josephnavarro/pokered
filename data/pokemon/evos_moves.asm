@@ -30,7 +30,7 @@ EvosMovesPointerTable:
 	dw RhyhornEvosMoves
 	dw LaprasEvosMoves
 	dw ArcanineEvosMoves
-	dw MewEvosMoves
+	dw ShedinjaEvosMoves
 	dw GyaradosEvosMoves
 	dw ShellderEvosMoves
 	dw TentacoolEvosMoves
@@ -428,14 +428,15 @@ ArcanineEvosMoves:
 ; Learnset
 	db 0
 
-MewEvosMoves:
+ShedinjaEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 10, TRANSFORM
-	db 20, MEGA_PUNCH
-	db 30, METRONOME
-	db 40, PSYCHIC_M
+	db 15, CONFUSE_RAY
+	db 23, ABSORB
+	db 29, SHADOW_SNEAK
+	db 36, FURY_SWIPES
+	db 50, SHADOW_BALL
 	db 0
 
 GyaradosEvosMoves:

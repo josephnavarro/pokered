@@ -165,6 +165,10 @@ MoveSoundTable:
 	db SFX_BATTLE_26,          $f0, $ff ; SUPER_FANG
 	db SFX_NOT_VERY_EFFECTIVE, $01, $ff ; SLASH
 	db SFX_BATTLE_2C,          $d8, $04 ; SUBSTITUTE
+	db SFX_NOT_VERY_EFFECTIVE, $01, $ff ; SHADOW_CLAW (as SLASH)
+	db SFX_BATTLE_25,          $00, $10 ; SHADOW_SNEAK (as QUICK_ATTACK)
+	db SFX_NOT_VERY_EFFECTIVE, $f0, $e0 ; SHADOW_BALL (as NIGHT_SHADE)
+	db SFX_DAMAGE,             $00, $80 ; METAL_CLAW (as SCRATCH)
 	db SFX_BATTLE_0B,          $00, $80 ; STRUGGLE
 	assert_table_length NUM_ATTACKS
 	db SFX_BATTLE_0B,          $00, $80

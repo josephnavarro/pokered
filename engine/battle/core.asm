@@ -368,15 +368,15 @@ MainInBattleLoop:
 	callfar SwitchEnemyMon
 .noLinkBattle
 	ld a, [wPlayerSelectedMove]
-	cp QUICK_ATTACK
+	call IsPriorityMove
 	jr nz, .playerDidNotUseQuickAttack
 	ld a, [wEnemySelectedMove]
-	cp QUICK_ATTACK
+	call IsPriorityMove
 	jr z, .compareSpeed  ; if both used Quick Attack
 	jp .playerMovesFirst ; if player used Quick Attack and enemy didn't
 .playerDidNotUseQuickAttack
 	ld a, [wEnemySelectedMove]
-	cp QUICK_ATTACK
+	call IsPriorityMove
 	jr z, .enemyMovesFirst ; if enemy used Quick Attack and player didn't
 	ld a, [wPlayerSelectedMove]
 	cp COUNTER
@@ -5225,12 +5225,30 @@ AdjustDamageForMoveType:
 	ld a, [wEnemyMoveType]
 	ld [wMoveType], a
 .next
+; For the same type attack bonus, WONDER counts as GHOST and GUARD counts as
+; BUG, so Shedinja's Ghost and Bug moves still get STAB (and vice versa).
 	ld a, [wMoveType]
-	cp b ; does the move type match type 1 of the attacker?
+	call .canonicalType
+	ld l, a ; l = move type (canonical)
+	ld a, b
+	call .canonicalType
+	cp l ; does the move type match type 1 of the attacker?
 	jr z, .sameTypeAttackBonus
-	cp c ; does the move type match type 2 of the attacker?
+	ld a, c
+	call .canonicalType
+	cp l ; does the move type match type 2 of the attacker?
 	jr z, .sameTypeAttackBonus
 	jr .skipSameTypeAttackBonus
+.canonicalType
+	cp WONDER
+	jr nz, .notWonder
+	ld a, GHOST
+	ret
+.notWonder
+	cp GUARD
+	ret nz
+	ld a, BUG
+	ret
 .sameTypeAttackBonus
 ; if the move type matches one of the attacker's types
 	ld hl, wDamage + 1
@@ -6321,6 +6339,13 @@ SwapPlayerAndEnemyLevels:
 	pop bc
 	ret
 
+; returns z if the move in a has increased priority (Quick Attack or Shadow Sneak)
+IsPriorityMove:
+	cp QUICK_ATTACK
+	ret z
+	cp SHADOW_SNEAK
+	ret
+
 ; loads either red back pic or old man back pic
 ; also writes OAM data and loads tile patterns for the Red or Old Man back sprite's head
 ; (for use when scrolling the player sprite and enemy's silhouettes on screen)
@@ -7037,12 +7062,32 @@ LoadMonBackPic:
 	call ClearScreenArea
 	ld hl,  wMonHBackSprite - wMonHeader
 	call UncompressMonSprite
+	ld a, [wcf91]
+	cp SHEDINJA
+	jr z, .unscaled
 	predef ScaleSpriteByTwo
 	ld de, vBackPic
 	call InterlaceMergeSpriteBuffers ; combine the two buffers to a single 2bpp sprite
+.copyToSprites
 	ld hl, vSprites
 	ld de, vBackPic
 	ld c, (2 * SPRITEBUFFERSIZE) / 16 ; count of 16-byte chunks to be copied
 	ldh a, [hLoadedROMBank]
 	ld b, a
 	jp CopyVideoData
+
+.unscaled
+; Shedinja's back pic is 6*6 tiles and is drawn at its native size, centered
+; in the 7*7 sprite box like a front pic, instead of being scaled 2x from 4*4.
+; LoadUncompressedSpriteData wants the pic's dimension byte: width (in tiles)
+; in the low nybble of a and height in the high nybble of c.
+	ld a, [wSpriteHeight] ; in pixels, as set by the decompressor
+	add a                 ; pixels * 2 = tiles << 4
+	ld c, a
+	ld a, [wSpriteWidth]
+	srl a
+	srl a
+	srl a                 ; pixels / 8 = tiles
+	ld de, vBackPic
+	call LoadUncompressedSpriteData
+	jr .copyToSprites
