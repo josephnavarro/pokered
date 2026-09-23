@@ -29,6 +29,8 @@ Regigigas is "infamously known for an awful ability that makes it all but useles
 
 Cross-checked two independent ways: the displayed crit rate of 19.53% is exactly 100/512 (confirming base Speed 100), and the level-5 overlay stats (HP 27 / Atk 22 / Def 17 / Spc 17 / Spd 16) reproduce exactly from these bases with max DVs under the Gen 1 formula.
 
+*Deviation from the video: Slow Start **is** implemented here — see Part D.*
+
 ### A3. Moves (0:36–1:08, 1:56–3:02)
 
 He uses the **Gen 6** learnset as the base, then picks and chooses: "the level one moves that you're seeing here… they just use the bottom four and the rest require a move relearner." No other level-up moves were recreated because "they just aren't useful or they will be learned at the level that we would have already beat the game at."
@@ -98,6 +100,46 @@ Clean `make` from scratch with RGBDS 1.0.3, no errors.
 Sprite reconstruction was validated by rebuilding the *enemy* Geodude from the same frames and matching the repo's own `geodude.png` at 100%, which pins the pixel calibration (screen at x 393–1526, y 29–1049, 7.0875 video px per GB pixel). The Regigigas back sprite itself is identical across 8 frames drawn from two different battles (Brock's Onix and Misty's Staryu).
 
 Not exercised at runtime: SGB palette (PyBoy has no SGB).
+
+---
+
+## Part D — Slow Start (deliberate deviation from the video)
+
+The video's premise is that Gen 1 has no abilities, so Slow Start doesn't exist. This build puts it back, hardcoded to Regigigas rather than by adding an ability system.
+
+**Behaviour:** for the first `SLOW_START_TURNS` (5) full turns after Regigigas enters the field, its **Attack and Speed are halved**. At the end of the fifth turn it wears off and the battle prints `<USER> got its act together!`. Switching out and back in re-arms it, exactly as the real ability does.
+
+| Piece | Where | Note |
+|---|---|---|
+| Counter | `ram/wram.asm` → `wSlowStartTurns` at **$D06E** | Claims an existing unnamed `ds 1` padding byte between `wPlayerDisabledMove` and `wEnemyNumAttacksLeft`, so **no other WRAM address shifts** (verified: `wEnemyNumAttacksLeft` is still $D06F, `wPlayerName` still $D158). Nothing else reads or clears that byte. |
+| Arming | `engine/battle/core.asm`, `SendOutMon` | Set to 5 when the mon being sent out is Regigigas, 0 otherwise — so it is self-clearing for every other species and every new battle. |
+| Attack | `engine/battle/core.asm`, `GetDamageVarsForPlayerAttack.scaleStats` → `SlowStartHalveAttack` | Applied at the point the damage routine has just read the offensive stat. **This deliberately sits after the critical-hit branch**, which reads the unmodified Attack straight out of the party data — hooking anywhere earlier would let crits ignore Slow Start entirely, and Regigigas crits ~19.5% of the time (base Speed 100). Skipped for special moves, since Slow Start does not touch Special. |
+| Speed | `engine/battle/core.asm`, `MainInBattleLoop.compareSpeed` → `GetPlayerSpeedForTurnOrder` | The vanilla `StringCmp` against two RAM addresses was replaced with an inline 16-bit compare so the halved value never needs to be written anywhere. |
+| Countdown | `engine/battle/core.asm`, `SlowStartEndOfTurn` | Called after `CheckNumAttacksLeft` in both turn-order branches, i.e. once per full turn. |
+| Message | `engine/battle/core.asm` + `data/text/text_2.asm` → `_SlowStartEndedText` | Uses the `<USER>` text macro so it prints the player's nickname. |
+
+Both halvings floor at 1 rather than 0, so a stat can never be scaled out of existence.
+
+### A quirk worth knowing
+
+Gen 1 splits physical/special **by move type**, and Ice/Electric are special types. So Ice Punch and Thunder Punch run off Special and are **not** weakened by Slow Start — only the Normal-type moves (Crush Grip, Dizzy Punch, Body Slam, Mega Punch) are. That happens to match the real ability, which leaves Special Attack alone, and it gives the early game a real texture: during the first five turns the punches are your full-power option.
+
+### Verified
+
+Regigigas L20 vs Rattata L20, enemy speed pinned between half and full Regigigas speed, enemy restricted to a non-priority move, PP topped up each turn:
+
+- Counter runs 5 → 4 → 3 → 2 → 1 → 0, and `REGIGIGAS got its act together!` prints at the end of turn 5.
+- **Turn order:** enemy moves first on turns 1–5, Regigigas moves first from turn 6 on — the speed halving and its restoration are both real.
+- **Crush Grip damage** (3 runs, 30 turns, split by the critical-hit flag with a status-only enemy so the flag is unambiguous):
+
+| | non-crit | crit |
+|---|---|---|
+| Slow Start active | ~45–52 | ~82 |
+| Slow Start over | ~92–103 | 184 |
+
+  Both tiers halve cleanly, and the crit column confirms the hook covers the critical-hit path.
+
+**Scope:** the hooks are player-side only (`wBattleMonSpecies`, `wPlayerMoveType`, `wBattleMonSpeed`), which is complete for this ROM since Regigigas is obtainable only as the starter. An *enemy* Regigigas — reachable only through the debug party — would not have Slow Start.
 
 ## Not done
 

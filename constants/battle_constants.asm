@@ -1,5 +1,9 @@
 DEF MAX_LEVEL EQU 100
 
+; Regigigas' Slow Start: how many full turns its Attack and Speed stay halved
+; after it enters the field (gen 1 has no abilities to hang this on)
+DEF SLOW_START_TURNS EQU 5
+
 ; maximum moves known per mon
 DEF NUM_MOVES EQU 4
 

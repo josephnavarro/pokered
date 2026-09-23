@@ -390,13 +390,20 @@ MainInBattleLoop:
 	cp COUNTER
 	jr z, .playerMovesFirst ; if enemy used Counter and player didn't
 .compareSpeed
-	ld de, wBattleMonSpeed ; player speed value
-	ld hl, wEnemyMonSpeed ; enemy speed value
-	ld c, $2
-	call StringCmp ; compare speed values
+	call GetPlayerSpeedForTurnOrder ; bc = player speed, halved during Slow Start
+	ld a, [wEnemyMonSpeed]
+	ld d, a
+	ld a, [wEnemyMonSpeed + 1]
+	ld e, a
+	ld a, c
+	sub e
+	ld h, a ; low byte of the difference
+	ld a, b
+	sbc d
+	jr c, .enemyMovesFirst ; if enemy is faster
+	or h
 	jr z, .speedEqual
-	jr nc, .playerMovesFirst ; if player is faster
-	jr .enemyMovesFirst ; if enemy is faster
+	jr .playerMovesFirst ; if player is faster
 .speedEqual ; 50/50 chance for both players
 	ldh a, [hSerialConnectionStatus]
 	cp USING_INTERNAL_CLOCK
@@ -437,6 +444,7 @@ MainInBattleLoop:
 	jp z, HandlePlayerMonFainted
 	call DrawHUDsAndHPBars
 	call CheckNumAttacksLeft
+	call SlowStartEndOfTurn
 	jp MainInBattleLoop
 .playerMovesFirst
 	call ExecutePlayerMove
@@ -465,6 +473,7 @@ MainInBattleLoop:
 	jp z, HandleEnemyMonFainted
 	call DrawHUDsAndHPBars
 	call CheckNumAttacksLeft
+	call SlowStartEndOfTurn
 	jp MainInBattleLoop
 
 HandlePoisonBurnLeechSeed:
@@ -1749,6 +1758,13 @@ SendOutMon:
 	ld [wPlayerDisabledMove], a
 	ld [wPlayerDisabledMoveNumber], a
 	ld [wPlayerMonMinimized], a
+	ld [wSlowStartTurns], a ; a is still 0: no Slow Start for anything else
+	ld a, [wBattleMonSpecies]
+	cp REGIGIGAS
+	jr nz, .noSlowStart
+	ld a, SLOW_START_TURNS
+	ld [wSlowStartTurns], a
+.noSlowStart
 	ld b, SET_PAL_BATTLE
 	call RunPaletteCommand
 	ld hl, wEnemyBattleStatus1
@@ -3617,6 +3633,60 @@ HurtItselfText:
 	text_far _HurtItselfText
 	text_end
 
+SlowStartEndedText:
+	text_far _SlowStartEndedText
+	text_end
+
+; Regigigas' Slow Start halves its Attack (but not its Special) while it is
+; counting down. This is applied where the damage routine has just read the
+; offensive stat, so it covers critical hits too - those read the unmodified
+; Attack straight out of the party data and would otherwise slip through.
+; hl = the player's offensive stat. Preserves bc and de.
+SlowStartHalveAttack:
+	ld a, [wSlowStartTurns]
+	and a
+	ret z
+	ld a, [wPlayerMoveType]
+	cp SPECIAL
+	ret nc ; special moves use Special, which Slow Start leaves alone
+	srl h
+	rr l
+	ld a, h
+	or l
+	ret nz
+	inc l ; never scale the stat all the way down to zero
+	ret
+
+; bc = the player's current Speed, halved while Slow Start is counting down.
+GetPlayerSpeedForTurnOrder:
+	ld a, [wBattleMonSpeed]
+	ld b, a
+	ld a, [wBattleMonSpeed + 1]
+	ld c, a
+	ld a, [wSlowStartTurns]
+	and a
+	ret z
+	srl b
+	rr c
+	ld a, b
+	or c
+	ret nz
+	inc c
+	ret
+
+; Counts Slow Start down once per full turn and announces when it wears off.
+SlowStartEndOfTurn:
+	ld a, [wSlowStartTurns]
+	and a
+	ret z
+	dec a
+	ld [wSlowStartTurns], a
+	ret nz
+	xor a
+	ldh [hWhoseTurn], a ; so <USER> names the player's mon
+	ld hl, SlowStartEndedText
+	jp PrintText
+
 ConfusedNoMoreText:
 	text_far _ConfusedNoMoreText
 	text_end
@@ -4234,6 +4304,8 @@ GetDamageVarsForPlayerAttack:
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a ; hl = player's offensive stat
+	call SlowStartHalveAttack
+	ld a, h
 	or b ; is either high byte nonzero?
 	jr z, .next ; if not, we don't need to scale
 ; bc /= 4 (scale enemy's defensive stat)

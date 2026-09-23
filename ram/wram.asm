@@ -1296,7 +1296,10 @@ wPlayerToxicCounter:: db
 ; low nibble: disable turns left
 wPlayerDisabledMove:: db
 
-	ds 1
+; Regigigas' Slow Start: full turns left with its Attack and Speed halved.
+; Set when it is sent out, counted down at the end of each turn, and zero
+; whenever the player's active mon is anything else.
+wSlowStartTurns:: db
 
 ; when the enemy is attacking multiple times, the number of attacks left
 wEnemyNumAttacksLeft:: db
