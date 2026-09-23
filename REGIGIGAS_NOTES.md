@@ -107,7 +107,14 @@ Not exercised at runtime: SGB palette (PyBoy has no SGB).
 
 The video's premise is that Gen 1 has no abilities, so Slow Start doesn't exist. This build puts it back, hardcoded to Regigigas rather than by adding an ability system.
 
-**Behaviour:** for the first `SLOW_START_TURNS` (5) full turns after Regigigas enters the field, its **Attack and Speed are halved**. At the end of the fifth turn it wears off and the battle prints `<USER> got its act together!`. Switching out and back in re-arms it, exactly as the real ability does.
+**Behaviour:** for the first `SLOW_START_TURNS` (5) full turns after Regigigas enters the field, its **Attack and Speed are halved**. Switching out and back in re-arms it, exactly as the real ability does.
+
+**Messages.** Gen 1 has no ability for the player to inspect and never shows in-battle stats, so the effect would otherwise be invisible. Two lines make it legible:
+
+- On send-out, straight after `Go! REGIGIGAS!` — `<USER> is slow to start!`
+- At the end of the fifth turn — `<USER> got its act together!`
+
+(The real games announce only the wear-off; the entry line is a deliberate addition. Its wording drops the real message's "finally" because `REGIGIGAS finally got` is 21 characters against an 18-character text box.)
 
 | Piece | Where | Note |
 |---|---|---|
@@ -116,7 +123,7 @@ The video's premise is that Gen 1 has no abilities, so Slow Start doesn't exist.
 | Attack | `engine/battle/core.asm`, `GetDamageVarsForPlayerAttack.scaleStats` → `SlowStartHalveAttack` | Applied at the point the damage routine has just read the offensive stat. **This deliberately sits after the critical-hit branch**, which reads the unmodified Attack straight out of the party data — hooking anywhere earlier would let crits ignore Slow Start entirely, and Regigigas crits ~19.5% of the time (base Speed 100). Skipped for special moves, since Slow Start does not touch Special. |
 | Speed | `engine/battle/core.asm`, `MainInBattleLoop.compareSpeed` → `GetPlayerSpeedForTurnOrder` | The vanilla `StringCmp` against two RAM addresses was replaced with an inline 16-bit compare so the halved value never needs to be written anywhere. |
 | Countdown | `engine/battle/core.asm`, `SlowStartEndOfTurn` | Called after `CheckNumAttacksLeft` in both turn-order branches, i.e. once per full turn. |
-| Message | `engine/battle/core.asm` + `data/text/text_2.asm` → `_SlowStartEndedText` | Uses the `<USER>` text macro so it prints the player's nickname. |
+| Messages | `engine/battle/core.asm` (`SlowStartAnnounce`, `SlowStartEndOfTurn`) + `data/text/text_2.asm` → `_SlowStartBeganText`, `_SlowStartEndedText` | Both use the `<USER>` text macro, which resolves through `hWhoseTurn`, so each zeroes it first to name the player's mon. The entry line is printed at the tail of `SendOutMon` *before* `PrintEmptyString`, so the text box is cleared again before the screen is saved. |
 
 Both halvings floor at 1 rather than 0, so a stat can never be scaled out of existence.
 
@@ -128,6 +135,7 @@ Gen 1 splits physical/special **by move type**, and Ice/Electric are special typ
 
 Regigigas L20 vs Rattata L20, enemy speed pinned between half and full Regigigas speed, enemy restricted to a non-priority move, PP topped up each turn:
 
+- Message order on entry: `Wild RATTATA appeared!` → `Go! REGIGIGAS!` → `REGIGIGAS is slow to start!`, with the counter armed to 5.
 - Counter runs 5 → 4 → 3 → 2 → 1 → 0, and `REGIGIGAS got its act together!` prints at the end of turn 5.
 - **Turn order:** enemy moves first on turns 1–5, Regigigas moves first from turn 6 on — the speed halving and its restoration are both real.
 - **Crush Grip damage** (3 runs, 30 turns, split by the critical-hit flag with a status-only enemy so the flag is unambiguous):

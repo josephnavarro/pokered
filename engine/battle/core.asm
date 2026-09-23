@@ -1777,6 +1777,7 @@ SendOutMon:
 	predef AnimateSendingOutMon
 	ld a, [wcf91]
 	call PlayCry
+	call SlowStartAnnounce
 	call PrintEmptyString
 	jp SaveScreenTilesToBuffer1
 
@@ -3633,6 +3634,10 @@ HurtItselfText:
 	text_far _HurtItselfText
 	text_end
 
+SlowStartBeganText:
+	text_far _SlowStartBeganText
+	text_end
+
 SlowStartEndedText:
 	text_far _SlowStartEndedText
 	text_end
@@ -3673,6 +3678,17 @@ GetPlayerSpeedForTurnOrder:
 	ret nz
 	inc c
 	ret
+
+; Gen 1 has no ability for the player to read, so Slow Start announces itself
+; as Regigigas comes in. Called from SendOutMon once the counter is armed.
+SlowStartAnnounce:
+	ld a, [wSlowStartTurns]
+	and a
+	ret z
+	xor a
+	ldh [hWhoseTurn], a ; so <USER> names the player's mon
+	ld hl, SlowStartBeganText
+	jp PrintText
 
 ; Counts Slow Start down once per full turn and announces when it wears off.
 SlowStartEndOfTurn:

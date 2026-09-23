@@ -1037,6 +1037,11 @@ _HurtItselfText::
 	line "its confusion!"
 	prompt
 
+_SlowStartBeganText::
+	text "<USER> is"
+	line "slow to start!"
+	prompt
+
 _SlowStartEndedText::
 	text "<USER> got its"
 	line "act together!"
