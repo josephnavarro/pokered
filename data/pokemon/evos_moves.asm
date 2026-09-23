@@ -30,7 +30,7 @@ EvosMovesPointerTable:
 	dw RhyhornEvosMoves
 	dw LaprasEvosMoves
 	dw ArcanineEvosMoves
-	dw MewEvosMoves
+	dw RegigigasEvosMoves
 	dw GyaradosEvosMoves
 	dw ShellderEvosMoves
 	dw TentacoolEvosMoves
@@ -428,14 +428,11 @@ ArcanineEvosMoves:
 ; Learnset
 	db 0
 
-MewEvosMoves:
+RegigigasEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 10, TRANSFORM
-	db 20, MEGA_PUNCH
-	db 30, METRONOME
-	db 40, PSYCHIC_M
+; all four of its moves are known from level 1
 	db 0
 
 GyaradosEvosMoves:

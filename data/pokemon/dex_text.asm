@@ -198,14 +198,14 @@ _ArcanineDexEntry::
 	next "as if on wings"
 	dex
 
-_MewDexEntry::
-	text "So rare that it"
-	next "is still said to"
-	next "be a mirage by"
+_RegigigasDexEntry::
+	text "It is said to"
+	next "have towed the"
+	next "continents with"
 
-	page "many experts. Only"
-	next "a few people have"
-	next "seen it worldwide"
+	page "ropes. It slept"
+	next "for ages between"
+	next "its rampages"
 	dex
 
 _GyaradosDexEntry::

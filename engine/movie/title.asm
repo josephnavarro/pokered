@@ -120,12 +120,7 @@ DisplayTitleScreen:
 	call LoadScreenTilesFromBuffer2
 	call EnableLCD
 
-IF DEF(_RED)
-	ld a, STARTER1 ; which Pokemon to show first on the title screen
-ENDC
-IF DEF(_BLUE)
-	ld a, STARTER2 ; which Pokemon to show first on the title screen
-ENDC
+	ld a, REGIGIGAS ; which Pokemon to show first on the title screen
 	ld [wTitleMonSpecies], a
 	call LoadTitleMonSprite
 
@@ -269,8 +264,8 @@ TitleScreenPickNewMon:
 	ld a, HIGH(vBGMap0)
 	call TitleScreenCopyTileMapToVRAM
 
-.loop
-; Keep looping until a mon different from the current one is picked.
+; Pick a mon from TitleMons. The list is all Regigigas, so the vanilla
+; "must differ from the current one" retry loop would never terminate.
 	call Random
 	and $f
 	ld c, a
@@ -278,13 +273,7 @@ TitleScreenPickNewMon:
 	ld hl, TitleMons
 	add hl, bc
 	ld a, [hl]
-	ld hl, wTitleMonSpecies
-
-; Can't be the same as before.
-	cp [hl]
-	jr z, .loop
-
-	ld [hl], a
+	ld [wTitleMonSpecies], a
 	call LoadTitleMonSprite
 
 	ld a, $90

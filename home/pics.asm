@@ -9,7 +9,7 @@ UncompressMonSprite::
 	ld a, [hl]
 	ld [wSpriteInputPtr+1], a
 ; define (by index number) the bank that a pokemon's image is in
-; index = MEW:             bank $1
+; index = REGIGIGAS:       bank $1 (Mew's slot)
 ; index = FOSSIL_KABUTOPS: bank $B
 ;       index < $1F:       bank $9 ("Pics 1")
 ; $1F ≤ index < $4A:       bank $A ("Pics 2")
@@ -18,8 +18,8 @@ UncompressMonSprite::
 ; $99 ≤ index:             bank $D ("Pics 5")
 	ld a, [wcf91]
 	ld b, a
-	cp MEW
-	ld a, BANK(MewPicFront)
+	cp REGIGIGAS
+	ld a, BANK(RegigigasPicFront)
 	jr z, .GotBank
 	ld a, b
 	cp FOSSIL_KABUTOPS

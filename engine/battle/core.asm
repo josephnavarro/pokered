@@ -7037,12 +7037,32 @@ LoadMonBackPic:
 	call ClearScreenArea
 	ld hl,  wMonHBackSprite - wMonHeader
 	call UncompressMonSprite
+	ld a, [wcf91]
+	cp REGIGIGAS
+	jr z, .unscaled
 	predef ScaleSpriteByTwo
 	ld de, vBackPic
 	call InterlaceMergeSpriteBuffers ; combine the two buffers to a single 2bpp sprite
+.copyToSprites
 	ld hl, vSprites
 	ld de, vBackPic
 	ld c, (2 * SPRITEBUFFERSIZE) / 16 ; count of 16-byte chunks to be copied
 	ldh a, [hLoadedROMBank]
 	ld b, a
 	jp CopyVideoData
+
+.unscaled
+; Regigigas' back pic is 6*6 tiles and is drawn at its native size, centered
+; in the 7*7 sprite box like a front pic, instead of being scaled 2x from 4*4.
+; LoadUncompressedSpriteData wants the pic's dimension byte: width (in tiles)
+; in the low nybble of a and height in the high nybble of c.
+	ld a, [wSpriteHeight] ; in pixels, as set by the decompressor
+	add a                 ; pixels * 2 = tiles << 4
+	ld c, a
+	ld a, [wSpriteWidth]
+	srl a
+	srl a
+	srl a                 ; pixels / 8 = tiles
+	ld de, vBackPic
+	call LoadUncompressedSpriteData
+	jr .copyToSprites

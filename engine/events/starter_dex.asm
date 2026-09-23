@@ -1,9 +1,10 @@
 ; this function temporarily makes the starters (and Ivysaur) owned
 ; so that the full Pokedex information gets displayed in Oak's lab
 StarterDex:
-	ld a, 1 << (DEX_BULBASAUR - 1) | 1 << (DEX_IVYSAUR - 1) | 1 << (DEX_CHARMANDER - 1) | 1 << (DEX_SQUIRTLE - 1)
-	ld [wPokedexOwned], a
+	; every ball holds a Regigigas, so only its entry needs to be shown in full
+	ld hl, wPokedexOwned + (DEX_REGIGIGAS - 1) / 8
+	set (DEX_REGIGIGAS - 1) % 8, [hl]
 	predef ShowPokedexData
-	xor a
-	ld [wPokedexOwned], a
+	ld hl, wPokedexOwned + (DEX_REGIGIGAS - 1) / 8
+	res (DEX_REGIGIGAS - 1) % 8, [hl]
 	ret

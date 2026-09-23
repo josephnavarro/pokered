@@ -26,7 +26,7 @@ CryData::
 	mon_cry SFX_CRY_04, $00, $80 ; Rhyhorn
 	mon_cry SFX_CRY_1B, $00, $80 ; Lapras
 	mon_cry SFX_CRY_15, $00, $80 ; Arcanine
-	mon_cry SFX_CRY_1E, $EE, $FF ; Mew
+	mon_cry SFX_CRY_12, $F0, $20 ; Regigigas
 	mon_cry SFX_CRY_17, $00, $80 ; Gyarados
 	mon_cry SFX_CRY_18, $00, $80 ; Shellder
 	mon_cry SFX_CRY_1A, $00, $80 ; Tentacool

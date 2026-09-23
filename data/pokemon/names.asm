@@ -20,7 +20,7 @@ MonsterNames::
 	db "RHYHORN@@@"
 	db "LAPRAS@@@@"
 	db "ARCANINE@@"
-	db "MEW@@@@@@@"
+	db "REGIGIGAS@"
 	db "GYARADOS@@"
 	db "SHELLDER@@"
 	db "TENTACOOL@"
