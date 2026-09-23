@@ -432,7 +432,16 @@ RegigigasEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-; all four of its moves are known from level 1
+; Generation 9's level-up order, with the levels compressed so that the whole
+; curve is reachable in a gen 1 playthrough (gen 9 runs out to level 78, and
+; Regigigas is in the slow growth group). Gen 9 levels are noted alongside.
+	db  8, FACADE       ; gen 9: 12
+	db 14, STOMP        ; gen 9: 18
+	db 22, MEGA_PUNCH   ; gen 9: 36
+	db 30, ZEN_HEADBUTT ; gen 9: 54
+	db 38, HAMMER_ARM   ; gen 9: 66
+	db 44, HYPER_BEAM   ; gen 9: 72, as Giga Impact
+	db 48, CRUSH_GRIP   ; gen 9: 78
 	db 0
 
 GyaradosEvosMoves:

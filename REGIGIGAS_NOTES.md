@@ -29,7 +29,7 @@ Regigigas is "infamously known for an awful ability that makes it all but useles
 
 Cross-checked two independent ways: the displayed crit rate of 19.53% is exactly 100/512 (confirming base Speed 100), and the level-5 overlay stats (HP 27 / Atk 22 / Def 17 / Spc 17 / Spd 16) reproduce exactly from these bases with max DVs under the Gen 1 formula.
 
-*Deviation from the video: Slow Start **is** implemented here — see Part D.*
+*Deviations from the video: Slow Start **is** implemented here (Part D), and the learnset has been modernized to generation 9 (Part E).*
 
 ### A3. Moves (0:36–1:08, 1:56–3:02)
 
@@ -148,6 +148,79 @@ Regigigas L20 vs Rattata L20, enemy speed pinned between half and full Regigigas
   Both tiers halve cleanly, and the crit column confirms the hook covers the critical-hit path.
 
 **Scope:** the hooks are player-side only (`wBattleMonSpecies`, `wPlayerMoveType`, `wBattleMonSpeed`), which is complete for this ROM since Regigigas is obtainable only as the starter. An *enemy* Regigigas — reachable only through the debug party — would not have Slow Start.
+
+---
+
+## Part E — Modernizing the learnset to generation 9
+
+The video's set is the generation 6 learnset. Generation 9 (Scarlet/Violet) reworked it substantially, and this build now follows gen 9 instead. Learnset checked against **pokemondb** and **Serebii**, which agree exactly on the level-up list.
+
+### What gen 9 actually gives it
+
+| Lv | Move | Type | Gen 1 verdict |
+|---|---|---|---|
+| 1 | Pound | Normal | kept |
+| 1 | Confuse Ray | Ghost | kept |
+| 6 | Payback | Dark | **dropped** — no Dark type |
+| 12 | Facade | Normal | **added** (its 2x-when-statused effect is not expressible) |
+| 18 | Stomp | Normal | kept |
+| 24 | Protect | Normal | **dropped** — no such mechanic |
+| 30 | Knock Off | Dark | **dropped** — no Dark type |
+| 36 | Mega Punch | Normal | kept |
+| 42 | Body Press | Fighting | **dropped** — attacks off Defense |
+| 48 | Wide Guard | Rock | **dropped** — doubles-only mechanic |
+| 54 | Zen Headbutt | Psychic | **added** |
+| 60 | Heavy Slam | Steel | **dropped** — no Steel type on this branch |
+| 66 | Hammer Arm | Fighting | **added** (the self Speed drop is not expressible) |
+| 72 | Giga Impact | Normal | **substituted** with Hyper Beam — gen 1's is an exact match at 150/90%/5 PP with a recharge turn |
+| 78 | Crush Grip | Normal | kept |
+
+### Decisions taken
+
+**1. Levels rescaled to gen 1 pacing.** Gen 9 runs the curve out to level 78, but Regigigas is in the *slow* growth group and a gen 1 playthrough ends in the fifties — a verbatim port would leave the signature move and Giga Impact permanently unreachable, with Pound as the only attack for the first eighteen levels. The gen 9 *order* is preserved and only the levels are compressed:
+
+```
+ 1  Pound          (gen 9: 1)      30  Zen Headbutt  (gen 9: 54)
+ 1  Confuse Ray    (gen 9: 1)      38  Hammer Arm    (gen 9: 66)
+ 8  Facade         (gen 9: 12)     44  Hyper Beam    (gen 9: 72, as Giga Impact)
+14  Stomp          (gen 9: 18)     48  Crush Grip    (gen 9: 78)
+22  Mega Punch     (gen 9: 36)
+```
+
+**2. TM list = gen 9's TMs intersected with gen 1's 50.** TM01 Mega Punch, TM08 Body Slam, TM10 Double-Edge, TM15 Hyper Beam, TM24 Thunderbolt, TM25 Thunder, TM26 Earthquake, TM44 Rest, TM45 Thunder Wave, TM48 Rock Slide, TM50 Substitute. Fire/Thunder/Ice Punch are gen 9 TMs but not gen 1 TMs, so they are simply not available. Hyper Beam is both a level-up move and a TM, exactly as Giga Impact is in gen 9.
+
+**3. No new types.** Dark and Steel stay out, so Payback, Knock Off and Heavy Slam are dropped rather than retyped.
+
+### Two casualties worth flagging
+
+Generation 9 drops both **Blizzard** and **Dizzy Punch** from the learnset entirely. Dizzy Punch was one of the video's four starting moves and Blizzard was its strongest TM, so modernizing costs Regigigas its 120-power Ice option. It also now *starts* with only Pound and Confuse Ray instead of four strong moves, which makes the early game markedly harder — that is faithful to gen 9, not an oversight.
+
+### The three new moves
+
+| Move | Entry | Gen 1 compromise |
+|---|---|---|
+| Facade | 70 / Normal / 100% / 20 PP | Effect dropped; gen 1 cannot check the user's status for a damage bonus. |
+| Zen Headbutt | 80 / Psychic / 90% / 15 PP | Real flinch chance is 20%; gen 1 offers only 10% or 30%, so `FLINCH_SIDE_EFFECT1` (10%) was chosen to avoid buffing an already overpowered mon. Switching to `FLINCH_SIDE_EFFECT2` is a one-word change. |
+| Hammer Arm | 100 / Fighting / 90% / 10 PP | Effect dropped; gen 1 has no "lower the user's Speed" side effect. |
+
+Animations and cries are reused (Body Slam, Confusion and Submission respectively).
+
+### An interaction worth knowing
+
+Gen 1 decides physical vs special **by move type**, so **Zen Headbutt is a special move here** and runs off Special (110) rather than Attack (160). That means it is the one damaging move Slow Start does not weaken — during the opening five turns it is Regigigas' best option, while every Normal and Fighting move is at half power.
+
+### Verified
+
+Read out of the built ROM: level-1 moveset `POUND, CONFUSE_RAY, NO_MOVE, NO_MOVE`; learnset L8/14/22/30/38/44/48; TM bits → 1, 8, 10, 15, 24, 25, 26, 44, 45, 48, 50; and the three new move entries at the values above.
+
+In the emulator, movesets come out right at every level (L5 Pound + Confuse Ray; L20 Pound, Confuse Ray, Facade, Stomp; L50 Zen Headbutt, Hammer Arm, Hyper Beam, Crush Grip), and damage sampling with RNG jitter confirms the Slow Start split:
+
+| Move | Slow Start on | Slow Start off |
+|---|---|---|
+| Crush Grip (Normal) | 76 | 145 |
+| Facade (Normal) | 55 | 108 |
+| Hammer Arm (Fighting) | 90–103 (crit 163–168) | 179–206 (crit 345–377) |
+| **Zen Headbutt (Psychic)** | **63–74 (crit 137)** | **63–74 (crit 137)** |
 
 ## Not done
 

@@ -165,6 +165,9 @@ AttackAnimationPointers:
 	dw SlashAnim
 	dw SubstituteAnim
 	dw MegaPunchAnim   ; CRUSH_GRIP
+	dw BodySlamAnim    ; FACADE
+	dw ConfusionAnim   ; ZEN_HEADBUTT
+	dw SubmissionAnim  ; HAMMER_ARM
 	dw StruggleAnim
 	assert_table_length NUM_ATTACKS
 	dw ShowPicAnim

@@ -166,6 +166,9 @@ MoveSoundTable:
 	db SFX_NOT_VERY_EFFECTIVE, $01, $ff ; SLASH
 	db SFX_BATTLE_2C,          $d8, $04 ; SUBSTITUTE
 	db SFX_BATTLE_0D,          $00, $40 ; CRUSH_GRIP (as MEGA_PUNCH)
+	db SFX_BATTLE_20,          $00, $c0 ; FACADE (as BODY_SLAM)
+	db SFX_BATTLE_14,          $00, $20 ; ZEN_HEADBUTT (as CONFUSION)
+	db SFX_BATTLE_23,          $01, $c0 ; HAMMER_ARM (as SUBMISSION)
 	db SFX_BATTLE_0B,          $00, $80 ; STRUGGLE
 	assert_table_length NUM_ATTACKS
 	db SFX_BATTLE_0B,          $00, $80

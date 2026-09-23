@@ -165,5 +165,8 @@ MoveNames::
 	li "SLASH"
 	li "SUBSTITUTE"
 	li "CRUSH GRIP"
+	li "FACADE"
+	li "ZEN HEADBUTT"
+	li "HAMMER ARM"
 	li "STRUGGLE"
 	assert_list_length NUM_ATTACKS

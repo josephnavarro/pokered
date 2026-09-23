@@ -177,5 +177,10 @@ Moves:
 	move SUBSTITUTE,   SUBSTITUTE_EFFECT,            0, NORMAL,       100, 10
 	move CRUSH_GRIP,   NO_ADDITIONAL_EFFECT,       100, NORMAL,       100,  5 ; Regigigas' signature move; the real one scales
 	                                                                          ; with the target's remaining HP (120 down to 1)
+	move FACADE,       NO_ADDITIONAL_EFFECT,        70, NORMAL,       100, 20 ; the real move doubles in power when
+	                                                                          ; the user is statused; gen 1 cannot
+	move ZEN_HEADBUTT, FLINCH_SIDE_EFFECT1,         80, PSYCHIC_TYPE,  90, 15 ; gen 1 has only 10%/30% flinch, not 20%;
+	                                                                          ; PSYCHIC_TYPE makes this a SPECIAL move
+	move HAMMER_ARM,   NO_ADDITIONAL_EFFECT,       100, FIGHTING,      90, 10 ; the real move lowers the user's Speed
 	move STRUGGLE,     RECOIL_EFFECT,               50, NORMAL,       100, 10
 	assert_table_length NUM_ATTACKS
