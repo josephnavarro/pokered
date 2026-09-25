@@ -23,3 +23,25 @@ _IndigoPlateauLobbyCooltrainerFText::
 	cont "next trainer!"
 	cont "Good luck!"
 	done
+
+_IndigoPlateauLobbyBirdMissingText::
+	text "Only a trainer"
+	line "with all three"
+	cont "birds may pass!"
+
+	para "@"
+	text_ram wcd6d
+	text " is not"
+	line "with you!@"
+	text_end
+
+_IndigoPlateauLobbyBirdPresentText::
+	text "Ah! @"
+	text_ram wcd6d
+	text " is"
+	line "with you!"
+
+	para "Show the other"
+	line "two to my"
+	cont "colleagues!"
+	done

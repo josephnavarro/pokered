@@ -1,38 +1,11 @@
-_Route23YouDontHaveTheBadgeYetText::
-	text "You can pass here"
-	line "only if you have"
-	cont "the @"
-	text_ram wcd6d
-	text "!"
+_Route23GuardText::
+	text "The road to"
+	line "VICTORY ROAD is"
+	cont "open to all!"
 
-	para "You don't have the"
-	line "@"
-	text_ram wcd6d
-	text " yet!"
-
-	para "You have to have"
-	line "it to get to"
-	cont "#MON LEAGUE!@"
-	text_end
-
-_Route23OhThatIsTheBadgeText::
-	text "You can pass here"
-	line "only if you have"
-	cont "the @"
-	text_ram wcd6d
-	text "!"
-
-	para "Oh! That is the"
-	line "@"
-	text_ram wcd6d
-	text "!@"
-	text_end
-
-_Route23GoRightAheadText::
-	text_start
-
-	para "OK then! Please,"
-	line "go right ahead!"
+	para "But the ELITE"
+	line "FOUR admit only a"
+	cont "true champion..."
 	done
 
 _Route23VictoryRoadGateSignText::

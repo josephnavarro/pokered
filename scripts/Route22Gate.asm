@@ -33,15 +33,6 @@ Route22GateScriptCoords:
 	dbmapcoord  5,  2
 	db -1 ; end
 
-Route22GateMovePlayerDownScript:
-	ld a, $1
-	ld [wSimulatedJoypadStatesIndex], a
-	ld a, D_DOWN
-	ld [wSimulatedJoypadStatesEnd], a
-	ld [wSpritePlayerStateData1FacingDirection], a
-	ld [wJoyIgnore], a
-	jp StartSimulatingJoypadStates
-
 Route22GatePlayerMovingScript:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
@@ -59,37 +50,14 @@ Route22Gate_TextPointers:
 	dw_const Route22GateGuardText, TEXT_ROUTE22GATE_GUARD
 
 Route22GateGuardText:
+; no longer checks for the BOULDERBADGE
 	text_asm
-	ld a, [wObtainedBadges]
-	bit BIT_BOULDERBADGE, a
-	jr nz, .has_boulderbadge
-	ld hl, Route22GateGuardNoBoulderbadgeText
-	call PrintText
-	call Route22GateMovePlayerDownScript
-	ld a, SCRIPT_ROUTE22GATE_PLAYER_MOVING
-	jr .set_current_script
-.has_boulderbadge
 	ld hl, Route22GateGuardGoRightAheadText
 	call PrintText
 	ld a, SCRIPT_ROUTE22GATE_NOOP
-.set_current_script
 	ld [wRoute22GateCurScript], a
 	jp TextScriptEnd
 
-Route22GateGuardNoBoulderbadgeText:
-	text_far _Route22GateGuardNoBoulderbadgeText
-	text_asm
-	ld a, SFX_DENIED
-	call PlaySoundWaitForCurrent
-	call WaitForSoundToFinish
-	ld hl, Route22GateGuardICantLetYouPassText
-	ret
-
-Route22GateGuardICantLetYouPassText:
-	text_far _Route22GateGuardICantLetYouPassText
-	text_end
-
 Route22GateGuardGoRightAheadText:
 	text_far _Route22GateGuardGoRightAheadText
-	sound_get_item_1
 	text_end
